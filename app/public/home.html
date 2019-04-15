@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #fadadd;
+      }
+    </style>
+    <title>Home</title>
+  </head>
+  <body>
+    <br />
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="display-4">Friend Finder ♥</h1>
+        <p class="lead">
+          Compatibility based friend finder
+        </p>
+        <img
+          src="https://i.ibb.co/3NsFKfY/pusheen.jpg"
+          alt="pusheen"
+          width="300"
+          height="210"
+        />
+        <hr class="my-4" />
+        <p>
+          Take the quiz and find your match!
+        </p>
+        <a class="btn btn-primary btn-lg" id="surveyBtn" href="#" role="button"
+          >Survey</a
+        >
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <a href="/api/friends">API Friends List</a> |
+          <a href="https://github.com/jsyum/FriendFinder">GitHub Repo</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $("#surveyBtn").click(function() {
+        window.location = "/survey";
+      });
+    </script>
+  </body>
+</html>
