@@ -38,7 +38,7 @@ module.exports = function(app) {
     // return best match
     var bestMatch = friendData[Match];
     res.json(bestMatch);
-    // friendData.push(req.body);
+    friendData.push(req.body);
   });
 
   //added below code to clear out the table while working with the functionality.
