@@ -1,4 +1,6 @@
 # FriendFinder
+<a href="https://jyfriendfinder.herokuapp.com/" target="_blank">Link to the deployed app</a>
+
 ![Friend Finder Demo](/images/home.png "friendfinderhome")
 FriendFinder is a compatibility testing app that matches the user with  the user most similar to them. The match is determined by comparing answers to personality-related questions. 
 ![Friend Finder Demo2](/images/survey.png "friendfindersurvey")
