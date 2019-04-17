@@ -15,6 +15,7 @@
         background-color: #fadadd;
       }
     </style>
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAADSx/8AAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAERERERERERERERESERERERERESAhERERERESAAIRERERESAAACERERESAAAAAhERESAAAAAAIRESAAAAAAACERIAAAAAAAIREgAAAAAAAhESAAACAAACEREgACEgACERERIiERIiERERERERERERERERERERERERERERERERERH//wAA/v8AAPx/AAD4PwAA8B8AAOAPAADABwAAgAMAAIADAACAAwAAgAMAAMEHAADjjwAA//8AAP//AAD//wAA" rel="icon" type="image/x-icon" />
     <title>Survey</title>
   </head>
   <body>
@@ -139,22 +140,43 @@
         </button>
       </form>
     </div>
+    
     <br />
+    <!--Modal-->
+    <div id="resultsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title" style="text-align: center">♡Your best match♡</h1>
+              </div>
+              <div class="modal-body">
+                  <h2 id="matchName"></h2>
+                  <img id="matchImage" style="max-width:400px;max-height:400px;" src=""
+                      alt="">
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+
+      </div>
   </body>
 </html>
 
 <!-- BELOW CODE HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 <script type="text/javascript">
   // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
   // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
-  // Our api recognizes the route (/api/friends)... and then runs the associated code (found in api-routes.js).
+  // Our api recognizes the route (/api/friends)... and then runs the associated code (found in apiRoutes.js).
   // In this case the associated code "saves" the data to the friends.js file
 
   $("#submit").on("click", function(event) {
     event.preventDefault();
 
-    // Here we grab the form elements
+    // Grab the form input by ID
     var userData = {
       name: $("#name").val(),
       photo: $("#photo").val(),
@@ -173,9 +195,16 @@
     };
 
     console.log(userData);
+// AJAX post to API
+$.post("/api/friends", userData, function(data) {
 
-    // following lines are similar to the standard ajax function we used.
-    // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-    // The callback is the response of the server.
-  });
+// Grab result from AJAX post so match name and photo are displayed
+$("#matchImage").attr("src", data.photo);
+$("#matchName").text(data.name);
+
+// Show modal with match result
+$("#resultsModal").modal("show");
+
+});
+});
 </script>

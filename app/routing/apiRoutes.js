@@ -16,7 +16,29 @@ module.exports = function(app) {
   // Then the server saves the data to the friends array)
 
   app.post("/api/friends", function(req, res) {
-    friendData.push(req.body);
+    var userScore = req.body.scores;
+    var scoresArray = [];
+    var Match = 0;
+
+    for (var i = 0; i < friendData.length; i++) {
+      var scoreDifference = 0;
+      for (var j = 0; j < userScore.length; j++) {
+        scoreDifference += Math.abs(friendData[i].scores[j] - userScore[j]);
+      }
+      scoresArray.push(scoreDifference);
+    }
+
+    // loop through scoresArray
+    for (var i = 0; i < scoresArray.length; i++) {
+      if (scoresArray[i] <= scoresArray[Match]) {
+        Match = i;
+      }
+    }
+
+    // return best match
+    var bestMatch = friendData[Match];
+    res.json(bestMatch);
+    // friendData.push(req.body);
   });
 
   //added below code to clear out the table while working with the functionality.
@@ -26,3 +48,6 @@ module.exports = function(app) {
     res.json({ ok: true });
   });
 };
+
+// var friendScores = friendData.map(friend => friend.scores);
+// console.log(friendScores);
